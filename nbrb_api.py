@@ -71,7 +71,7 @@ class NBRBAPI:
     @classmethod
     def get_byn_rate(
         cls,
-        ondate: str | None = None,
+        date: str | None = None,
         currency: str | None = None,
         monthly: bool = False,
     ) -> list[dict[str, str | int | float]] | dict[str, str | int | float]:
@@ -89,8 +89,8 @@ class NBRBAPI:
             url += f"/{currency}"
             params.add_parameters(parammode=2)
 
-        if ondate:
-            params.add_parameters(ondate=ondate.replace("-0", "-"))
+        if date:
+            params.add_parameters(date=date.replace("-0", "-"))
 
         params.add_parameters(periodicity=1 if monthly else 0)
 
@@ -112,10 +112,10 @@ class NBRBAPI:
         for date in dates:
             date = date.to_pydatetime().date().isoformat()
 
-            rate: float = NBRBAPI.get_byn_rate(currency=currency, ondate=date)[
+            rate: float = NBRBAPI.get_byn_rate(currency=currency, date=date)[
                 "Cur_OfficialRate"
             ]
-
-            rates[date] = rate
+            scale: int = NBRBAPI.get_byn_rate(currency=currency, date=date)["Cur_Scale"]
+            rates[date] = rate / scale
 
         return rates
