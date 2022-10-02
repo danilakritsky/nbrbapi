@@ -38,7 +38,7 @@ class NBRBAPI:
 
     BASE_URL: str = API_BASE_URL
 
-    # !!! does not contain data on BYN
+    # NOTE: does not contain data on BYN
     CURRENCY_MAP: dict[str, int] = {
         cur_dict["Cur_Abbreviation"]: cur_dict["Cur_ID"]
         for cur_dict in requests.get(f"{BASE_URL}/currencies").json()

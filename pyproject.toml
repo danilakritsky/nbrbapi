@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "nbrbapi"
+version = "0.1.0"
+description = "A python module that provides an interface to easily query the National Bank of the Republic of Belarus's exchange rates API."
+authors = ["Danila Kritsky <danilakritsky@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests= "^2.28.1"
+pandas = "^1.4.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
